@@ -44,7 +44,7 @@ export default class Debit extends Component {
     newDebits.unshift(newDebit);
     this.setState({
         debits: newDebits,
-        accountBalance: parseInt(this.state.accountBalance) - parseInt(amount),
+        accountBalance: parseFloat(this.state.accountBalance) - parseFloat(amount),
     })
   }
 

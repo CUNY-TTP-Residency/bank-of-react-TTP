@@ -44,7 +44,7 @@ export default class Credit extends Component {
     newCredits.unshift(newCredit);
     this.setState({
         credits: newCredits,
-        accountBalance: parseInt(this.state.accountBalance) + parseInt(amount),
+        accountBalance: parseFloat(this.state.accountBalance) + parseFloat(amount),
     })
   }
 
