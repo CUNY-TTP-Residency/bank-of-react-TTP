@@ -1,94 +1,90 @@
 import AccountBalance from "./AccountBalance";
 import React, { Component } from "react";
-import {Link} from "react-router-dom";
-import {Redirect} from "react-router-dom"
+import { Link } from "react-router-dom";
+import Display from "./display";
 
-class Debit extends Component{
-    constructor(props){
-        super(props);
-        this.state ={
-            debit:{
-                id: "",
-                description: "",
-                date: "",
-                amount: ""
-            },
-            redirect: false
-            
+class Debit extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      debit: {
+        id: "",
+        description: "",
+        amount: "",
+        date: "",
+      },
+    };
 
-
-        }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
 
-    }
 
-    handleChange(event){
-        const updatedDebit = {...this.state.debit}
-        const inputField = event.target.name
-        const inputValue = event.target.value
-        updatedDebit[inputField] = inputValue
+  handleChange = (event) => {
+    const name = event.target.name;
+    const inputValue = event.target.value;
+    const newDebit = { ...this.state.debit };
 
+    newDebit[name] = inputValue;
         this.setState({
-            debit: updatedDebit
+            debit: newDebit
         })
-    }
+  };
 
-    handleSubmit(event){
-        event.preventDefault()
-        this.setState({
-            
-        })
-    }
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.newCredit(this.state.debit);
 
-    
+  }
 
-      
+  render() {
+    return (
+      <div>
+        <h1>Debit</h1>
+        <Link to="/">Home</Link>
 
-    
-    render(){
-        return(
-            <div>
-                <h1>Debit</h1>
-                <Link to="/">Home</Link>
+        <div>
+          <AccountBalance accountBalance={this.props.accountBalance} />
+        </div>
 
-                <div>
-                    Account balance: <AccountBalance accountBalance ={this.props.accountBalance}/>
-                    <br/>
-                     
-                </div>
-                
-                <div>
-                    <form onSubmit="{this.handleSubmit}">
-                        <div>
-                            <label htmlFor="description">description</label>
-                            <input type="text" name="desription" onChange={this.handleChange} value={this.state.debit.description}/>
-                        </div>
-                        <div>
-                            <label htmlFor="amount">amount</label>
-                            <input type="number" name="debit ammount" onChange={this.handleChange} value={this.state.debit.amount}/>
-                        </div>
-                        <button>submit</button>
-
-
-
-
-
-                    </form>
-                </div>
-                
+        <div>
+          <h1>new transaction</h1>
+          <form onSubmit={this.handleSubmit}>
+            <label for="description">Description:</label>
+            <input
+              name="description"
+              value={this.state.debit.description}
+              onChange={this.handleChange}
+              placeholder="eg. food"
+            />
+            <label for="amount">Amount:</label>
+            <input
+              name="amount"
+              value={this.state.debit.amount}
+              onChange={this.handleChange}
+              placeholder="eg. 120"
+            />
+            <button>add debit</button>
+            </form>
+            </div> 
+          
         
 
-
-            
-            
-            
-            </div>
-            
-
-        )
-    }
+        <div>
+          <h1>Past transaction:</h1>
+        </div>
+        <div>
+          {this.props.debit.map((debit) => (
+            <Display
+              key={debit.id}
+              description={debit.description}
+              amount={debit.amount}
+              date={debit.date}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Debit;
