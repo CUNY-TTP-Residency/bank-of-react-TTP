@@ -1,7 +1,7 @@
 import "./App.css"
 
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch as router, Link, Route} from 'react-router-dom';
 import Home from './components/Home';
 import UserProfile from './components/UserProfile';
 import LogIn from './components/LogIn';
@@ -34,15 +34,17 @@ export default class App extends Component {
 
 
     return (
-      <Router>
-        <div>
+      <div>
+      <Router>     
+        <router>
           <Route exact path="/" component={Home}/>
           <Route exact path="/login" render={LogInComponent}/>
           <Route exact path="/userProfile" render={UserProfileComponent}/>
           <Route exact path="/debit" render={DebitComponent}/>
           <Route exact path="/credit" render={CreditComponent}/>
-        </div>
+        </router>
       </Router>
+      </div>
     );
   }
 }   
