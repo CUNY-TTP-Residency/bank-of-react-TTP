@@ -35,9 +35,9 @@ export default class App extends Component {
 
     return (
       <div>
-      <Router>     
+      <Router> 
         <router>
-          <Route exact path="/" component={Home}/>
+          <Route exact path={["/bank-of-react-TTP", "/"]} component={Home}/>
           <Route exact path="/login" render={LogInComponent}/>
           <Route exact path="/userProfile" render={UserProfileComponent}/>
           <Route exact path="/debit" render={DebitComponent}/>

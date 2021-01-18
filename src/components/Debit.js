@@ -53,7 +53,7 @@ export default class Debit extends Component {
   render() {
       return(
           <div>
-              <Link to="/">Homepage</Link> <br/>
+              <Link to="/">Logout</Link> <br/>
               <Link to="/userProfile">Back</Link>
               <hr/>
               
